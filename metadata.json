@@ -1,0 +1,8 @@
+{
+  "name": "Home Tutor Management",
+  "description": "Tutor Management System for tracking students and tutoring profiles.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

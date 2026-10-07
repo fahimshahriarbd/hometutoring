@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <title>Home Tutor Management</title>
+  <meta name="description" content="Tutor Management System for tracking students and tutoring profiles.">
+  <meta property="og:title" content="Home Tutor Management">
+  <meta property="og:description" content="Tutor Management System for tracking students and tutoring profiles.">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,105 +16,477 @@
 
   <main class="app">
 
-    <!-- LOGIN SCREEN -->
+    <!-- ========================================== -->
+    <!-- 1. LOGIN SCREEN -->
+    <!-- ========================================== -->
     <section id="loginScreen" class="screen">
 
-      <div class="login-card">
+      <div class="login-wrapper">
+        <div class="login-card" id="loginCard">
 
-        <div class="logo">
-          📚
-        </div>
-
-        <h1>Home Tutor</h1>
-
-        <p class="subtitle">
-          Tutor Management System
-        </p>
-
-        <form id="loginForm">
-
-          <div class="input-group">
-            <label for="username">
-              Username
-            </label>
-
-            <input
-              type="text"
-              id="username"
-              placeholder="Enter username"
-              required
-            >
-          </div>
-
-
-          <div class="input-group">
-
-            <label for="password">
-              Password
-            </label>
-
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter password"
-              required
-            >
-
-          </div>
-
-
+          <!-- Corner Settings / Admin Toggle -->
           <button
-            type="submit"
-            class="primary-button"
-            id="loginButton"
+            type="button"
+            id="adminToggleBtn"
+            class="corner-gear-btn"
+            title="Switch to Admin Login"
+            aria-label="Admin Settings"
           >
-            Login
+            <span class="gear-icon">⚙️</span>
+            <span class="gear-tag" id="settingsBadge">Admin</span>
           </button>
 
-          <p id="loginMessage" class="message"></p>
+          <!-- Brand Header -->
+          <div class="login-hero">
+            <div class="app-icon" id="loginLogo">🎓</div>
+            <div class="role-badge" id="loginBadge">Student Portal</div>
+            <h1 id="loginTitle">Student Login</h1>
+            <p class="login-sub" id="loginSubtitle">Enter your 4-digit ID and PIN</p>
+          </div>
 
-        </form>
+          <!-- Form -->
+          <form id="loginForm" autocomplete="off">
 
+            <div class="form-field">
+              <label for="username" id="usernameLabel">Student ID</label>
+              <div class="input-wrap">
+                <span class="field-icon">👤</span>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="e.g. 1001"
+                  required
+                  autocomplete="username"
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="password" id="passwordLabel">PIN Code</label>
+              <div class="input-wrap">
+                <span class="field-icon">🔒</span>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="e.g. 1234"
+                  required
+                  autocomplete="current-password"
+                >
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" id="loginButton">
+              Sign In
+            </button>
+
+            <!-- Quick Mode Switch Link -->
+            <div class="switch-row">
+              <button type="button" id="switchModeLink" class="btn-link">
+                ⚙️ Tutor / Admin Login
+              </button>
+            </div>
+
+            <p id="loginMessage" class="status-msg"></p>
+
+          </form>
+
+        </div>
       </div>
 
     </section>
 
 
-    <!-- STUDENT SCREEN -->
-    <section
-      id="studentScreen"
-      class="screen hidden"
-    >
+    <!-- ========================================== -->
+    <!-- 2. STUDENT PORTAL SCREEN -->
+    <!-- ========================================== -->
+    <section id="studentPortalScreen" class="screen hidden">
 
-      <header class="topbar">
-
-        <div>
-          <h2>Student Profile</h2>
-          <p id="welcomeText"></p>
+      <header class="app-header">
+        <div class="header-brand">
+          <span class="brand-symbol">📚</span>
+          <div>
+            <h2>Home Tutor</h2>
+            <p id="studentGreeting">Welcome</p>
+          </div>
         </div>
-
-        <button
-          id="logoutButton"
-          class="logout-button"
-        >
+        <button id="studentLogoutBtn" class="btn-logout">
           Logout
         </button>
-
       </header>
 
+      <div class="page-body">
 
-      <div id="studentList" class="student-list">
+        <!-- Student Profile Card with 1:1 Photo -->
+        <div class="profile-card">
+          <div class="profile-meta">
+            <div class="badge-row">
+              <span class="tag-accent" id="studentClassDisplay">HSC 2nd Year</span>
+              <span class="tag-id" id="studentIdDisplay">ID: 1001</span>
+            </div>
+            <h1 class="student-name" id="studentNameDisplay">Student 01</h1>
+            
+            <div class="subject-row">
+              <span class="meta-label">Subjects:</span>
+              <div class="tag-list" id="studentSubjectsDisplay">
+                <span class="subject-tag">Biology</span>
+                <span class="subject-tag">Chemistry</span>
+              </div>
+            </div>
 
-        <div class="loading">
-          Loading students...
+            <div class="tutor-line">
+              Tutor: <strong>Fahim</strong>
+            </div>
+          </div>
+
+          <!-- 1:1 Square Photo -->
+          <div class="photo-column">
+            <div class="photo-1x1-box">
+              <img
+                id="studentPhotoImg"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80"
+                alt="1:1 Student Photo"
+                class="photo-1x1-img"
+              >
+              <span class="ratio-tag">1:1 Photo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lessons & Notes (Refresh button removed as requested) -->
+        <div class="content-card">
+          <div class="card-header">
+            <div>
+              <h3>Study Log & Lessons</h3>
+              <p class="card-subtitle">Class dates, lesson notes, and tests</p>
+            </div>
+          </div>
+
+          <div id="studyDaysList" class="lessons-feed">
+            <div class="loader-box">Loading lessons...</div>
+          </div>
         </div>
 
       </div>
 
     </section>
 
-  </main>
 
+    <!-- ========================================== -->
+    <!-- 3. ONLINE TEST MODAL -->
+    <!-- ========================================== -->
+    <div id="testModal" class="modal-backdrop hidden">
+      <div class="modal-window">
+        <div class="modal-top">
+          <div>
+            <span class="modal-badge" id="testSubjectBadge">Biology</span>
+            <h3 id="testTitle">Quiz</h3>
+            <p id="testSubtitle" class="modal-note">Select the correct option</p>
+          </div>
+          <button id="closeTestModalBtn" class="btn-close">✕</button>
+        </div>
+
+        <div id="testBody" class="modal-scroll-area">
+          <div id="testQuestionsContainer" class="quiz-container">
+            <!-- Questions injected via JS -->
+          </div>
+        </div>
+
+        <!-- Result View -->
+        <div id="testResultView" class="result-container hidden">
+          <div class="score-banner">
+            <div class="banner-emoji" id="scoreEmoji">🎉</div>
+            <h2 id="scoreTitle">Quiz Completed!</h2>
+            <div class="score-val" id="scoreDisplay">2 / 2</div>
+            <p id="scorePercentage" class="score-pct">Score: 100%</p>
+          </div>
+
+          <h4 class="review-heading">Answer Review:</h4>
+          <div id="testReviewContainer" class="review-feed">
+            <!-- Review items injected via JS -->
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="submitTestBtn" class="btn-primary">
+            Submit Quiz
+          </button>
+          <button type="button" id="closeResultBtn" class="btn-primary hidden">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 4. TUTOR / ADMIN PANEL -->
+    <!-- ========================================== -->
+    <section id="adminScreen" class="screen hidden">
+
+      <header class="app-header">
+        <div class="header-brand">
+          <span class="brand-symbol">👨‍🏫</span>
+          <div>
+            <h2>Tutor Admin Panel</h2>
+            <p>Signed in: <strong>Fahim</strong></p>
+          </div>
+        </div>
+        <button id="adminLogoutBtn" class="btn-logout">
+          Logout
+        </button>
+      </header>
+
+      <div class="page-body">
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs" aria-label="Admin Navigation">
+          <button class="tab-item active" data-tab="studentsTab">
+            👥 Students
+          </button>
+          <button class="tab-item" data-tab="addStudyDayTab">
+            📅 Add Lessons
+          </button>
+          <button class="tab-item" data-tab="addQuestionTab">
+            📝 Add Quiz
+          </button>
+          <button class="tab-item" data-tab="resultsTab">
+            📊 Results
+          </button>
+          <button class="tab-item" data-tab="passwordsTab">
+            🔑 Passwords (Users Sheet)
+          </button>
+        </nav>
+
+        <!-- TAB 1: Students -->
+        <div id="studentsTab" class="tab-pane active">
+          <div class="toolbar-row">
+            <input
+              type="text"
+              id="adminSearchStudent"
+              class="search-bar"
+              placeholder="Search students..."
+            >
+            <button id="openAddStudentModalBtn" class="btn-action">
+              + New Student
+            </button>
+          </div>
+
+          <div id="adminStudentList" class="cards-grid">
+            <div class="loader-box">Loading students...</div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Add Lessons -->
+        <div id="addStudyDayTab" class="tab-pane">
+          <div class="dual-columns">
+            
+            <!-- Add Study Day -->
+            <div class="pane-card">
+              <h3>1. Add Study Day</h3>
+              <p class="pane-note">Schedule date for student</p>
+              
+              <form id="addStudyDayForm">
+                <div class="form-field">
+                  <label>Select Student</label>
+                  <select id="dayStudentSelect" required></select>
+                </div>
+
+                <div class="form-field">
+                  <label>Day Label</label>
+                  <input type="text" id="dayLabelInput" placeholder="e.g. DAY-03" value="DAY-03" required>
+                </div>
+
+                <div class="form-field">
+                  <label>Date</label>
+                  <input type="date" id="dayDateInput" required>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                  Save Day
+                </button>
+                <p id="studyDayMsg" class="feedback-msg"></p>
+              </form>
+            </div>
+
+            <!-- Add Lesson -->
+            <div class="pane-card">
+              <h3>2. Add Lesson & Notes</h3>
+              <p class="pane-note">What was taught & notes</p>
+
+              <form id="addLessonForm">
+                <div class="form-field">
+                  <label>Select Study Day</label>
+                  <select id="lessonDaySelect" required></select>
+                </div>
+
+                <div class="form-field">
+                  <label>Subject</label>
+                  <input type="text" id="lessonSubjectInput" placeholder="e.g. Biology" required>
+                </div>
+
+                <div class="form-field">
+                  <label>Short Notes</label>
+                  <textarea id="lessonNoteInput" rows="3" placeholder="Summary of lesson & topics taught..." required></textarea>
+                </div>
+
+                <div class="form-field">
+                  <label>PDF Notes URL (Optional)</label>
+                  <input type="url" id="lessonPdfInput" placeholder="https://drive.google.com/...">
+                </div>
+
+                <div class="check-field">
+                  <label>
+                    <input type="checkbox" id="lessonTestEnabled" checked>
+                    Enable Online Quiz for this lesson
+                  </label>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                  Save Lesson
+                </button>
+                <p id="lessonMsg" class="feedback-msg"></p>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 3: Add Quiz Questions -->
+        <div id="addQuestionTab" class="tab-pane">
+          <div class="pane-card single-max">
+            <h3>Add Quiz Question</h3>
+            <p class="pane-note">Create MCQ questions for student testing</p>
+
+            <form id="addQuestionForm">
+              <div class="form-field">
+                <label>Target Lesson</label>
+                <select id="questionLessonSelect" required></select>
+              </div>
+
+              <div class="form-field">
+                <label>Question Text</label>
+                <input type="text" id="questionTextInput" placeholder="Enter question..." required>
+              </div>
+
+              <div class="grid-2col">
+                <div class="form-field">
+                  <label>Option A</label>
+                  <input type="text" id="optAInput" placeholder="Option A" required>
+                </div>
+                <div class="form-field">
+                  <label>Option B</label>
+                  <input type="text" id="optBInput" placeholder="Option B" required>
+                </div>
+                <div class="form-field">
+                  <label>Option C</label>
+                  <input type="text" id="optCInput" placeholder="Option C" required>
+                </div>
+                <div class="form-field">
+                  <label>Option D</label>
+                  <input type="text" id="optDInput" placeholder="Option D" required>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label>Correct Option</label>
+                <select id="correctAnswerSelect" required>
+                  <option value="A">Option A</option>
+                  <option value="B">Option B</option>
+                  <option value="C">Option C</option>
+                  <option value="D">Option D</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label>Explanation (Optional)</label>
+                <textarea id="explanationInput" rows="2" placeholder="Why this option is correct..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary">
+                Save Question
+              </button>
+              <p id="questionMsg" class="feedback-msg"></p>
+            </form>
+          </div>
+        </div>
+
+        <!-- TAB 4: Test Results -->
+        <div id="resultsTab" class="tab-pane">
+          <div class="pane-card single-max">
+            <h3>Student Quiz Results</h3>
+            <p class="pane-note">Recorded scores and submissions</p>
+
+            <div id="testResultsList" class="table-scroll">
+              <!-- Results table via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: Passwords & Credentials (Users Sheet) -->
+        <div id="passwordsTab" class="tab-pane">
+          <div class="pane-card single-max">
+            <h3>Student Passwords & Logins</h3>
+            <p class="pane-note">Saved credentials mirrored to Google Sheet <strong>Users</strong> tab (ID, Username, PIN, Role)</p>
+
+            <div id="usersCredentialsList" class="table-scroll">
+              <!-- Users table via JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 5. ADD STUDENT MODAL -->
+    <!-- ========================================== -->
+    <div id="addStudentModal" class="modal-backdrop hidden">
+      <div class="modal-window">
+        <div class="modal-top">
+          <div>
+            <h3>Add New Student</h3>
+            <p class="modal-note">Auto 4-digit ID assigned (e.g. 1002)</p>
+          </div>
+          <button id="closeAddStudentModalBtn" class="btn-close">✕</button>
+        </div>
+
+        <form id="addStudentForm" class="modal-scroll-area">
+          <div class="form-field">
+            <label>Full Name</label>
+            <input type="text" id="newStudentName" placeholder="e.g. Student 02" required>
+          </div>
+
+          <div class="form-field">
+            <label>Class</label>
+            <input type="text" id="newStudentClass" placeholder="e.g. HSC 1st Year, Class 10" required>
+          </div>
+
+          <div class="form-field">
+            <label>Subjects (Comma-separated)</label>
+            <input type="text" id="newStudentSubjects" placeholder="e.g. Physics, Higher Math" required>
+          </div>
+
+          <div class="form-field">
+            <label>1:1 Photo URL (Optional)</label>
+            <input type="url" id="newStudentImageUrl" placeholder="https://... photo link">
+          </div>
+
+          <div class="form-field">
+            <label>Student PIN Code (e.g. 1234)</label>
+            <input type="text" id="newStudentPin" placeholder="4-digit PIN" value="1234" required>
+          </div>
+
+          <button type="submit" class="btn-primary" id="saveStudentBtn">
+            Save Student & Credential
+          </button>
+          <p id="addStudentMsg" class="feedback-msg"></p>
+        </form>
+      </div>
+    </div>
+
+  </main>
 
   <script src="app.js"></script>
 
