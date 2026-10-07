@@ -1,1 +1,374 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
+  min-height: 100vh;
+}
+
+
+button,
+input {
+  font-family: Arial, sans-serif;
+}
+
+
+.app {
+  min-height: 100vh;
+}
+
+
+.screen {
+  min-height: 100vh;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+#loginScreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+
+  background: #ffffff;
+
+  padding: 35px 30px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.08);
+
+  text-align: center;
+}
+
+
+.logo {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef4ff;
+
+  border-radius: 18px;
+
+  font-size: 34px;
+}
+
+
+.login-card h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+
+.subtitle {
+  color: #6b7280;
+  font-size: 14px;
+
+  margin-bottom: 30px;
+}
+
+
+.input-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+
+.input-group label {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-bottom: 7px;
+}
+
+
+.input-group input {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  border: 1px solid #d9dee8;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font-size: 15px;
+
+  transition: 0.2s;
+}
+
+
+.input-group input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+.primary-button {
+  width: 100%;
+
+  border: none;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.primary-button:hover {
+  background: #1d4ed8;
+}
+
+
+.primary-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+.message {
+  min-height: 20px;
+
+  margin-top: 15px;
+
+  font-size: 14px;
+
+  color: #dc2626;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+  width: 100%;
+
+  padding: 20px;
+
+  background: white;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+
+.topbar h2 {
+  font-size: 22px;
+}
+
+
+.topbar p {
+  margin-top: 5px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+
+.logout-button {
+  border: 1px solid #e5e7eb;
+
+  background: white;
+
+  padding: 9px 14px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+
+.logout-button:hover {
+  background: #f3f4f6;
+}
+
+
+/* =========================
+   STUDENT LIST
+========================= */
+
+.student-list {
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 25px 20px;
+}
+
+
+.student-card {
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+.student-info h3 {
+  font-size: 22px;
+
+  margin-bottom: 7px;
+}
+
+
+.student-info p {
+  color: #6b7280;
+
+  margin-bottom: 10px;
+}
+
+
+.subjects {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+
+.subject {
+  padding: 6px 10px;
+
+  background: #eef4ff;
+
+  color: #2563eb;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+.student-image {
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 3px solid #eef4ff;
+}
+
+
+.loading {
+  text-align: center;
+
+  padding: 40px;
+
+  color: #6b7280;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .login-card {
+    padding: 30px 22px;
+  }
+
+
+  .topbar {
+    padding: 16px;
+
+    align-items: flex-start;
+  }
+
+
+  .topbar h2 {
+    font-size: 19px;
+  }
+
+
+  .student-card {
+    flex-direction: column-reverse;
+
+    text-align: center;
+  }
+
+
+  .subjects {
+    justify-content: center;
+  }
+
+
+  .student-image {
+    width: 90px;
+    height: 90px;
+  }
+
+}
